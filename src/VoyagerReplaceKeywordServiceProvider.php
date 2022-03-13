@@ -2,22 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Joy\ReplaceKeyword;
+namespace Joy\VoyagerReplaceKeyword;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Joy\VoyagerReplaceKeyword\Console\Commands\ReplaceKeyword;
+use TCG\Voyager\Facades\Voyager;
 
 /**
- * Class ReplaceKeywordServiceProvider
+ * Class VoyagerReplaceKeywordServiceProvider
  *
  * @category  Package
- * @package   JoyReplaceKeyword
+ * @package   JoyVoyagerReplaceKeyword
  * @author    Ramakant Gangwar <gangwar.ramakant@gmail.com>
  * @copyright 2021 Copyright (c) Ramakant Gangwar (https://github.com/rxcod9)
- * @license   http://github.com/rxcod9/joy-replace-keyword/blob/main/LICENSE New BSD License
- * @link      https://github.com/rxcod9/joy-replace-keyword
+ * @license   http://github.com/rxcod9/joy-voyager-replace-keyword/blob/main/LICENSE New BSD License
+ * @link      https://github.com/rxcod9/joy-voyager-replace-keyword
  */
-class ReplaceKeywordServiceProvider extends ServiceProvider
+class VoyagerReplaceKeywordServiceProvider extends ServiceProvider
 {
     /**
      * Boot
@@ -26,9 +28,11 @@ class ReplaceKeywordServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Voyager::addAction(\Joy\VoyagerReplaceKeyword\Actions\ReplaceKeywordAction::class);
+
         $this->registerPublishables();
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'joy-replace-keyword');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'joy-voyager-replace-keyword');
 
         $this->mapApiRoutes();
 
@@ -36,7 +40,7 @@ class ReplaceKeywordServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'joy-replace-keyword');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'joy-voyager-replace-keyword');
     }
 
     /**
@@ -57,7 +61,7 @@ class ReplaceKeywordServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        Route::prefix(config('joy-replace-keyword.route_prefix', 'api'))
+        Route::prefix(config('joy-voyager-replace-keyword.route_prefix', 'api'))
             ->middleware('api')
             ->group(__DIR__ . '/../routes/api.php');
     }
@@ -69,9 +73,11 @@ class ReplaceKeywordServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/replace-keyword.php', 'joy-replace-keyword');
+        $this->mergeConfigFrom(__DIR__ . '/../config/voyager-replace-keyword.php', 'joy-voyager-replace-keyword');
 
-        $this->registerCommands();
+        if ($this->app->runningInConsole()) {
+            $this->registerCommands();
+        }
     }
 
     /**
@@ -82,20 +88,26 @@ class ReplaceKeywordServiceProvider extends ServiceProvider
     protected function registerPublishables(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/replace-keyword.php' => config_path('joy-replace-keyword.php'),
+            __DIR__ . '/../config/voyager-replace-keyword.php' => config_path('joy-voyager-replace-keyword.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/joy-replace-keyword'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/joy-voyager-replace-keyword'),
         ], 'views');
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/joy-replace-keyword'),
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/joy-voyager-replace-keyword'),
         ], 'translations');
     }
 
     protected function registerCommands(): void
     {
-        //
+        $this->app->singleton('command.joy.voyager.replace-keyword', function () {
+            return new ReplaceKeyword();
+        });
+
+        $this->commands([
+            'command.joy.voyager.replace-keyword',
+        ]);
     }
 }

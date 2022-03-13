@@ -1,22 +1,22 @@
 {
-    "name": "joy/replace-keyword",
-    "description": "This Laravel/Voyager module adds ReplaceKeyword support to Voyager.",
+    "name": "joy/voyager-replace-keyword",
+    "description": "This Laravel/Voyager module adds VoyagerReplaceKeyword support to Voyager.",
     "keywords": [
         "joy",
         "replace-keyword",
-        "joy-replace-keyword",
         "voyager-replace-keyword",
+        "joy-voyager-replace-keyword",
         "cms",
         "voyager",
         "laravel"
     ],
-    "homepage": "https://github.com/rxcod9/joy-replace-keyword",
+    "homepage": "https://github.com/rxcod9/joy-voyager-replace-keyword",
     "license": "MIT",
     "authors": [{
         "name": "Ramakant Gangwar",
         "email": "gangwar.ramakant@gmail.com",
         "homepage": "https://github.com/rxcod9",
-        "role": "Tech Lead"
+        "role": "Tech Lead & Architect"
     }],
     "require": {
         "php": "^7.3|^8.0",
@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Joy\\ReplaceKeyword\\": "src"
+            "Joy\\VoyagerReplaceKeyword\\": "src"
         },
         "files": [
             "src/helper.php"
@@ -47,18 +47,21 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Joy\\ReplaceKeyword\\Tests\\": "tests"
+            "Joy\\VoyagerReplaceKeyword\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Joy\\ReplaceKeyword\\ReplaceKeywordServiceProvider"
+                "Joy\\VoyagerReplaceKeyword\\VoyagerReplaceKeywordServiceProvider"
             ]
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "henzeb/composer-link": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
