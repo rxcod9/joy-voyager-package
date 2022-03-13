@@ -3,12 +3,8 @@
 namespace Joy\VoyagerReplaceKeyword\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Models\DataType;
 
 class ReplaceKeyword extends Command
 {
