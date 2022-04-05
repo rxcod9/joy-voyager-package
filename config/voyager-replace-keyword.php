@@ -36,6 +36,11 @@ return [
     'route_prefix' => env('VOYAGER_REPLACE_KEYWORD_ROUTE_PREFIX', 'joy-voyager-replace-keyword'),
 
     /*
+     * The action_permission for voyager-replace-keyword package.
+     */
+    'action_permission' => env('VOYAGER_REPLACE_KEYWORD_ACTION_PERMISSION', 'browse'),
+
+    /*
     |--------------------------------------------------------------------------
     | Controllers config
     |--------------------------------------------------------------------------

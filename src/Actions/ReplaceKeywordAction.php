@@ -21,7 +21,7 @@ class ReplaceKeywordAction extends AbstractAction
 
     public function getPolicy()
     {
-        return 'browse';
+        return config('joy-voyager-replace-keyword.action_permission', 'browse');
     }
 
     public function getAttributes()
@@ -62,7 +62,7 @@ class ReplaceKeywordAction extends AbstractAction
         // Check permission
         Gate::authorize('browse', app($dataType->model_name));
 
-        // Your macgic here
+        // Your magic here
 
         return redirect()->back()->with([
             'message'    => __('joy-voyager-replace-keyword::generic.successfully_replace_keyworded') . " {$dataType->getTranslatedAttribute('display_name_singular')}",
