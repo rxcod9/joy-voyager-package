@@ -25,11 +25,20 @@ By 🐼 [Ramakant Gangwar](https://github.com/rxcod9).
 ```bash
 # 1. Require this Package in your fresh Laravel/Voyager project
 composer require joy/voyager-replace-keyword
+```
+To install Joy VoyagerReplaceKeyword without dummy simply run
 
-# 2. Publish
-php artisan vendor:publish --provider="Joy\VoyagerReplaceKeyword\VoyagerReplaceKeywordServiceProvider" --force
+```bash
+php artisan joy-replace-keyword:install
 ```
 
+If you prefer installing it with dummy run
+
+```bash
+php artisan joy-replace-keyword:install --with-dummy
+```
+
+And we're all good to go!
 ---
 
 

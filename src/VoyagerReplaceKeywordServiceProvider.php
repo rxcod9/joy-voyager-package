@@ -6,6 +6,7 @@ namespace Joy\VoyagerReplaceKeyword;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Joy\VoyagerReplaceKeyword\Console\Commands\Install;
 use Joy\VoyagerReplaceKeyword\Console\Commands\ReplaceKeyword;
 use TCG\Voyager\Facades\Voyager;
 
@@ -106,8 +107,13 @@ class VoyagerReplaceKeywordServiceProvider extends ServiceProvider
             return new ReplaceKeyword();
         });
 
+        $this->app->singleton('command.joy.voyager.replace-keyword.install', function () {
+            return new Install();
+        });
+
         $this->commands([
             'command.joy.voyager.replace-keyword',
+            'command.joy.voyager.replace-keyword.install',
         ]);
     }
 }
