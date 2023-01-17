@@ -3,9 +3,9 @@
 namespace Joy\VoyagerReplaceKeyword\Http\Controllers;
 
 use Joy\VoyagerReplaceKeyword\Http\Traits\ReplaceKeywordAction;
-use TCG\Voyager\Http\Controllers\VoyagerBaseController as TCGVoyagerBaseController;
+use Joy\VoyagerCore\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
 
-class VoyagerBaseController extends TCGVoyagerBaseController
+class VoyagerBaseController extends BaseVoyagerBaseController
 {
     use ReplaceKeywordAction;
 }
